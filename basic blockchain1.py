@@ -38,13 +38,13 @@ class Blockchain:
         self.chain.append(block)
    
 
-# we create block after genesis block
+# we create block after genesis block 
     def create_block(self, prev_block):
+        
         prev_hash = prev_block['HASH']
-        prev_nonce = prev_block['nonce']
         index = prev_block['index'] + 1
         timestamp = str(datetime.datetime.now())
-        nonce = self.calculate_nonce(prev_hash, prev_nonce, index, timestamp)
+        nonce = self.calculate_nonce(prev_hash,index, timestamp)
         data = {
             'index': index,
             'nonce': nonce,
@@ -65,7 +65,7 @@ class Blockchain:
         block_str = json.dumps(data, sort_keys=True).encode()
         return hashlib.sha256(block_str).hexdigest()
 
-    def calculate_nonce(self, prev_hash, prev_nonce, index, timestamp):
+    def calculate_nonce(self, prev_hash,index, timestamp):
         nonce = 0
         flag = False
         while flag is False:
@@ -94,6 +94,7 @@ blockchain = Blockchain()
 
 @app.route('/mine', methods=['GET'])
 def mine_block():
+    #data from last block is taken 
     prev_block = blockchain.get_previous_block()
     blockchain.create_block(prev_block)
     block = blockchain.get_previous_block()
