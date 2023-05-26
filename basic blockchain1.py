@@ -1,8 +1,9 @@
 import datetime
 import hashlib
-import json
+import json         
 from flask import Flask, jsonify
 
+# Initialize the web app
 app = Flask(__name__)
 
 class Blockchain:
@@ -11,6 +12,7 @@ class Blockchain:
         self.create_genesis_block()
 
     def create_genesis_block(self):
+        # Initialize the first block (genesis block)
         nonce = 0
         prev = "0"
         data = {
@@ -24,6 +26,7 @@ class Blockchain:
             nonce += 1
             data['nonce'] = nonce
             HASH = self.calculate_hash(data)
+            
         block = {
             'index': 1,
             'nonce': nonce,
@@ -31,10 +34,11 @@ class Blockchain:
             'prev': data['prev'],
             'HASH': HASH
         }
+        #adding genesis block to blockchain
         self.chain.append(block)
    
 
-
+# we create block after genesis block
     def create_block(self, prev_block):
         prev_hash = prev_block['HASH']
         prev_nonce = prev_block['nonce']
@@ -63,7 +67,8 @@ class Blockchain:
 
     def calculate_nonce(self, prev_hash, prev_nonce, index, timestamp):
         nonce = 0
-        while True:
+        flag = False
+        while flag is False:
             data = {
                 'index': index,
                 'timestamp': timestamp,
@@ -72,6 +77,7 @@ class Blockchain:
             }
             HASH = self.calculate_hash(data)
             if HASH[:4] == '0000':
+                flag = True
                 return nonce
             else:
                 nonce += 1
