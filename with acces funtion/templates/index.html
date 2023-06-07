@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload File</title>
+</head>
+<body>
+    <h1>Upload File</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Select file:</label>
+        <input type="file" id="file" name="file" required><br>
+        <label for="account">Account:</label>
+        <input type="text" id="account" name="account" placeholder="Account" required><br>
+        <label for="private_key">Private Key:</label>
+        <input type="password" id="private_key" name="private_key" placeholder="Private Key" required><br>
+        <input type="submit" value="Upload">
+    </form>
+
+    <h1>Allow Access</h1>
+    <form action="/allow" method="post">
+        <label for="user">User,adress of user u want to grant access:</label> 
+        <input type="text" id="user" name="user" placeholder="User" required><br>
+        <label for="account">Account:</label>
+        <input type="text" id="account" name="account" placeholder="Account" required><br>
+        <label for="private_key">Private Key:</label>
+        <input type="password" id="private_key" name="private_key" placeholder="Private Key" required><br>
+        <input type="submit" value="Allow Access">
+    </form>
+</body>
+</html>
