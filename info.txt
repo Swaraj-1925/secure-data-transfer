@@ -1,0 +1,8 @@
+here you need to install hardhat , node js 
+for python like libraries flask,web3,requests
+
+in this project we uploding data to web3 
+we are doing this by using ipsf and blockchain
+
+to intract with ipsf we are using web3.storage token it uplodes data to ipsf netwoek and gives cid we are going to 
+uplode that with a access code which is uniq for each block on blockchain on blockchain it will help us to get cid from specif block
