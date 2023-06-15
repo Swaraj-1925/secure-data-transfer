@@ -189,7 +189,7 @@ contract_abi =    [
   ]
 
 # Contract address deployed on the Ethereum network
-contract_address = w3.to_checksum_address('0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512')
+contract_address = w3.to_checksum_address('0x5FbDB2315678afecb367f032d93F642f64180aa3')
 
 # Create a contract instance
 contract = w3.eth.contract(address=contract_address, abi=contract_abi)
@@ -252,20 +252,21 @@ def upload_file():
 @app.route('/grant_access', methods=['POST'])
 def grant_access():
     address = request.form['address']
-    user_address = request.form['user_address']
-    file = request.files['file_name']
-    #user_address = w3.to_checksum_address(user_address_str.lower())  # Convert address to lowercase
-    contract.functions.grantAccess(user_address).transact({'from': address})
-    return redirect('/dashboard?address=' + address)
+    user_address = request.form['user_address'] 
+    file = request.form['file_name']
+    contract.functions.grantAccess(user_address,file).transact({'from': address})
+    ST='access has been granted'
+    return ST
 
 
 @app.route('/revoke_access', methods=['POST'])
 def revoke_access(): 
     address = request.form['address']
-    user_address=request.form['user_address']
-    txn = contract.functions.revokeAccess(user_address).transact({'from': address})
-    tx_hash = w3.to_hex(txn)
-    return redirect('/transaction?hash=' + tx_hash)
+    user_address = request.form['user_address'] 
+    file = request.form['file_name']
+    contract.functions.revokeAccess(user_address,file).transact({'from': address})
+    ST='access has been removed'
+    return ST
 
 
 @app.route('/get_all_file_names', methods=['POST'])
@@ -283,8 +284,9 @@ def get_cid():
     address = request.form['address']
     file_name = request.form['file_name']  
     cid = contract.functions.getFileCID(file_name).call({'from': address}) 
+    ipfc_link= f'{cid}.ipfs.w3s.link.'
     
-    return cid 
+    return ipfc_link  
    
 
 
