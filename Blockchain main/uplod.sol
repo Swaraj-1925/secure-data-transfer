@@ -9,7 +9,7 @@ contract Upload {
     string[] public fileNames;
     string[] public fileInfo;
 
-    constructor() {
+    constructor() { 
         admin = msg.sender;
     }
 
