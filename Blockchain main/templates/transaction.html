@@ -1,14 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Hubballi&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Hubballi&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
     <title>Transaction Details</title>
 </head>
 <body>
-    <h2>Transaction Details</h2>
-    <p>Transaction Hash: {{ txn.hash }}</p>
-    <p>From: {{ txn.from }}</p>
-    <p>To: {{ txn.to }}</p>
-    <p>Block Number: {{ txn.blockNumber }}</p>
-    <p>Block Hash: {{ block.hash }}</p>
+    <li>
+        <h2>Transaction Details</h2>
+        <p>Transaction Hash: {{ txn.hash.hex()  }}</p>
+        <p>From: {{ txn.from }}</p>
+        <p>To: {{ txn.to }}</p>
+        <p>Block Number: {{ txn.blockNumber }}</p>
+        <p>Block Hash: {{ block.hash.hex()  }}</p>
+    </li>
+
 </body>
+<style>
+    body{
+        display: flex;
+    }
+    li{
+        margin: 0;
+        height: 500px;
+        width: 440px;
+        box-shadow: 10px 10px black;
+        background-color: #F5F5F5;
+        position: absolute;
+        top: 16%;
+        left: 35.5%;
+        justify-content: center;
+        display: grid;
+    }
+    h2{
+        display: flex;
+        margin: 14px 0px;
+        align-items: center;
+        justify-content: center;
+        font-size: 46px;
+        font-family: 'Bree Serif', serif;
+        font-family: 'Hubballi', cursive;
+    }
+    p{
+        display: flex;
+        margin: 0px;
+        font-size: 23px;
+        font-family: 'Bree Serif', serif;
+        font-family: 'Hubballi', cursive;
+        font-family: 'Rajdhani', sans-serif;
+        text-align: center;
+    }
+</style>
 </html>
