@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, redirect
 import web3
 import requests
 import os
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
 
 app = Flask(__name__)
 
