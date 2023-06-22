@@ -38,8 +38,26 @@ contract Upload {
     }
 
     function getFileNames() public view returns (string[] memory) {
-        return fileNames;
+    // Create a dynamic array to store the file names
+    string[] memory userFileNames = new string[](fileNames.length);
+    uint256 count = 0;
+
+    // Iterate through all file names and filter the ones uploaded by the caller
+    for (uint256 i = 0; i < fileNames.length; i++) {
+        if (fileAdmins[fileNames[i]] == msg.sender) {
+            userFileNames[count] = fileNames[i];
+            count++;
+        }
     }
+
+    // Create a new dynamic array with the correct length and copy the filtered file names
+    string[] memory result = new string[](count);
+    for (uint256 i = 0; i < count; i++) {
+        result[i] = userFileNames[i];
+    }
+
+    return result;
+}
 
     function getFileCID(string memory fileName) public view returns (string memory) {
         require(allowedAccess[msg.sender], "You do not have access to view this file.");
@@ -54,4 +72,3 @@ contract Upload {
         return fileAdmins[fileName];
     }
 }
-
