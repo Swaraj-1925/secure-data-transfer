@@ -213,7 +213,7 @@ def upload_file():
     file = request.files['file']
     
     headers = {
-        'Authorization': f'Bearer {"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEM4OTdFNTAxRTRFRjc2MTNFZUFlNTdkNUI5QUUwN2FmOGY3RTAwNjAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODUzNzY3NzYwNDEsIm5hbWUiOiJzZWN1cmUgZGF0YSBzdG9yYWdlIn0.nRiYTlJO4zyBIthWEI1oVGsaum3YuBV2J9xHJipHO44"}'
+        'Authorization': f'Bearer {"<YOUR_WEB3.STORAGE_API_KEY>"}'
     }
     
     response = requests.post('https://api.web3.storage/upload', files={'file': file}, headers=headers)
