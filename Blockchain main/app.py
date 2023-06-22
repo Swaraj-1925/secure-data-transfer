@@ -189,7 +189,7 @@ contract_abi =    [
   ]
 
 # Contract address deployed on the Ethereum network
-contract_address = w3.to_checksum_address('0x5FbDB2315678afecb367f032d93F642f64180aa3')
+contract_address = w3.to_checksum_address('0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9')
 
 # Create a contract instance
 contract = w3.eth.contract(address=contract_address, abi=contract_abi)
@@ -241,7 +241,7 @@ def upload_file():
     }
 
     with open(os.path.join(folder_name, 'transaction_details.txt'), 'a') as f:
-        f.write(str(transaction_details)) 
+        f.write(str(transaction_details)+'\n') 
   
     txn=receipt['transactionHash'] 
     # Redirect to transaction details page
