@@ -287,7 +287,7 @@ def get_all_file_names():
      
     return render_template('dashboard.html', address=address, file_names=file_names) 
 
-
+@app.route('/get_cid', methods=['POST'])
 def get_cid():
     address = request.form['address']
     file_name = request.form['file_name']  
