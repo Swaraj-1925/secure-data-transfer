@@ -9,7 +9,7 @@ app = Flask(__name__)
 w3 = web3.Web3(web3.HTTPProvider('http://127.0.0.1:8545/'))
 
 # Load the ABI (Application Binary Interface) of the Solidity contract
-contract_abi =    [
+contract_abi =   [
     {
       "inputs": [],
       "stateMutability": "nonpayable",
@@ -187,7 +187,7 @@ contract_abi =    [
   ]
 
 # Contract address deployed on the Ethereum network
-contract_address = w3.to_checksum_address('0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9')
+contract_address = w3.to_checksum_address('0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9')
 
 # Create a contract instance
 contract = w3.eth.contract(address=contract_address, abi=contract_abi)
@@ -220,7 +220,7 @@ def upload_file():
 
     # Set your Pinata API key as Authorization token
     headers = {
-        'Authorization': 'Bearer <your pinata api key>'
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI2NWE2NjQ5Zi1lNmE5LTQzYjEtOTYyNC0wYmM0YmRmNDQ2MWMiLCJlbWFpbCI6InNhbS44MzEwMDAwQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfSx7ImlkIjoiTllDMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJhZWE3YTkxZjM3YjQ5NDAwOTgxNCIsInNjb3BlZEtleVNlY3JldCI6IjJmZjVlZTU3MzQzYjdmMzMxOTI0MmFjZmI3OThlNmI0MGU0OTJiMzU5ODU0MmE4NTJlZGJhN2MyYjQwNTdkMzMiLCJpYXQiOjE3MTMxNjA2NTN9.W1JVgEulXZ9B9uX_F4bxpM76UZfPJryLqhpr4cLpEy4'
     }
 
     # Make a POST request to Pinata API to pin the file to IPFS
@@ -288,14 +288,22 @@ def get_all_file_names():
     return render_template('dashboard.html', address=address, file_names=file_names) 
 
 
-@app.route('/get_cid', methods=['POST'])
 def get_cid():
     address = request.form['address']
     file_name = request.form['file_name']  
-    cid = contract.functions.getFileCID(file_name).call({'from': address}) 
-    ipfc_link= f'{cid}.ipfs.w3s.link.'
-    
-    return ipfc_link  
+
+    try:
+        # Attempt to retrieve the CID for the file
+        cid = contract.functions.getFileCID(file_name).call({'from': address})
+        ipfs_link = f'https://gold-rapid-bovid-346.mypinata.cloud/ipfs/{cid}'
+        return ipfs_link
+    except web3.exceptions.SolidityError as e:
+        # Check if the error is due to access denial
+        if "You do not have access to view this file." in str(e):
+            return "Access denied: You do not have permission to view this file."
+        else:
+            return f"Error: {str(e)}"
+  
    
  
 
