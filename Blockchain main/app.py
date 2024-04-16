@@ -220,7 +220,7 @@ def upload_file():
 
     # Set your Pinata API key as Authorization token
     headers = {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI2NWE2NjQ5Zi1lNmE5LTQzYjEtOTYyNC0wYmM0YmRmNDQ2MWMiLCJlbWFpbCI6InNhbS44MzEwMDAwQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImlkIjoiRlJBMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfSx7ImlkIjoiTllDMSIsImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxfV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiJhZWE3YTkxZjM3YjQ5NDAwOTgxNCIsInNjb3BlZEtleVNlY3JldCI6IjJmZjVlZTU3MzQzYjdmMzMxOTI0MmFjZmI3OThlNmI0MGU0OTJiMzU5ODU0MmE4NTJlZGJhN2MyYjQwNTdkMzMiLCJpYXQiOjE3MTMxNjA2NTN9.W1JVgEulXZ9B9uX_F4bxpM76UZfPJryLqhpr4cLpEy4'
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6Ikp.....(something like this)'
     }
 
     # Make a POST request to Pinata API to pin the file to IPFS
