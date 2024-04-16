@@ -10,7 +10,7 @@
    
 7) after that copy all the config file ...deploy.js and hardhatcong.js
    
-9) run a node in seprate terminal and dont close it..... npx node
+9) run a node in seprate terminal and dont close it..... npx hardhat node
     
 11) then compile sol code using this cammand... npx hardhat run --network localhost scripts/deploy.js
     
