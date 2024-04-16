@@ -6,7 +6,7 @@
 
 4)Then run... npx hardhat -> create javascript
 
-5) run install --save-dev "hardhat@^2.12.4" "nomicfoundation/hardhat-toolbox@^2.0.0"
+5) run npm install --save-dev "hardhat@^2.12.4" "nomicfoundation/hardhat-toolbox@^2.0.0"
    
 7) after that copy all the config file ...deploy.js and hardhatcong.js
    
