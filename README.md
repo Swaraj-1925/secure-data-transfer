@@ -13,7 +13,7 @@
 9) run a node in seprate terminal and dont close it..... npx node
     
 11) then compile sol code using this cammand... npx hardhat run --network localhost scripts/deploy.js
-    
+    npx hardhat init run --network localhost scripts/deploy.j ...if the 1st cammand didnt work 
 ** make sure you check the contract name and modify it
 
 13) install this lab
