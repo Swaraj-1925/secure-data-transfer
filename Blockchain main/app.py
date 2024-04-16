@@ -286,7 +286,7 @@ def get_cid():
     
     return ipfc_link  
    
-
+ 
 
 @app.route('/transaction')
 def transaction_details():
