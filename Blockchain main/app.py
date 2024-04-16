@@ -206,21 +206,32 @@ def dashboard():
     else:
         address = request.args.get('address')
         return render_template('dashboard.html', address=address)
-    
 @app.route('/upload', methods=['POST'])
 def upload_file():
     address = request.form['address']
     file = request.files['file']
-    
-    headers = {
-        'Authorization': f'Bearer {"<YOUR_WEB3.STORAGE_API_KEY>"}'
-    }
-    
-    response = requests.post('https://api.web3.storage/upload', files={'file': file}, headers=headers)
-    response_data = response.json()
- 
 
-    cid = response_data['cid']
+    # Prepare the file and metadata for Pinata API
+    files = {
+        'file': (file.filename, file.stream, file.content_type),
+        'pinataMetadata': ('', '{"name": "' + file.filename + '"}'),
+        'pinataOptions': ('', '{"cidVersion": 1}')
+    }
+
+    # Set your Pinata API key as Authorization token
+    headers = {
+        'Authorization': 'Bearer <your pinata api key>'
+    }
+
+    # Make a POST request to Pinata API to pin the file to IPFS
+    response = requests.post('https://api.pinata.cloud/pinning/pinFileToIPFS', files=files, headers=headers)
+    response_data = response.json()
+
+    # Retrieve the IPFS hash and other relevant information from the response
+    cid = response_data['IpfsHash']
+
+
+     
     file_name = file.filename
     
     tx_hash = contract.functions.addFile(file_name,cid).transact({'from' : address})
